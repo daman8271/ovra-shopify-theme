@@ -1,0 +1,53 @@
+{% liquid
+  assign lookbook_link = section.settings.link
+  if lookbook_link == blank
+    assign lookbook_link = routes.all_products_collection_url
+  endif
+%}
+
+<section class="lookbook-section" id="lookbook">
+  <div class="lookbook-panel">
+    <div
+      class="lookbook-panel__media"
+      style="background-image: url('{{ section.settings.image | default: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800' }}');"
+      data-parallax
+      data-parallax-speed="0.14"
+    ></div>
+    <div class="lookbook-panel__overlay"></div>
+
+    <div class="lookbook-panel__content">
+      <span class="eyebrow">{{ 'lookbook.subtitle' | t }}</span>
+      <h2 class="section-heading">{{ 'lookbook.heading' | t }}</h2>
+      <p class="section-subheading">
+        Layered silhouettes, sharp tailoring, and after-dark textures move through a fully cinematic drop built for editorial impact.
+      </p>
+      <a class="button button--accent-outline" href="{{ lookbook_link }}">
+        {{ 'lookbook.cta' | t }}
+      </a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Full width lookbook",
+  "settings": [
+    {
+      "type": "text",
+      "id": "image",
+      "label": "Background image URL",
+      "default": "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Full width lookbook"
+    }
+  ]
+}
+{% endschema %}

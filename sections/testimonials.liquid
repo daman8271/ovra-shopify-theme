@@ -1,0 +1,46 @@
+{% liquid
+  assign reviews = '“The fit feels expensive before you even touch the fabric. It lands like a magazine story, not just another drop.”|“Shipping was quick, the finishing is sharp, and every piece feels like it belongs in a styled editorial.”|“ŌVRA nails that rare mix of premium tailoring and streetwear attitude. Nothing in my wardrobe gets more compliments.”' | split: '|'
+  assign names = 'Aarav Mehta|Sana Kapoor|Rhea Malhotra' | split: '|'
+  assign avatars = 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200|https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200|https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200' | split: '|'
+%}
+
+<section class="ovra-section">
+  <div class="ovra-container">
+    <div class="section-header">
+      <div>
+        <span class="eyebrow">Community</span>
+        <h2 class="section-heading">{{ 'testimonials.heading' | t }}</h2>
+      </div>
+      <p class="section-subheading">
+        The pieces are built for people who shop with instinct and expect the finish of a luxury label.
+      </p>
+    </div>
+
+    <div class="testimonial-grid">
+      {% for review in reviews %}
+        {% assign index = forloop.index0 %}
+        <article class="testimonial-card">
+          <p class="testimonial-card__quote">“</p>
+          <p class="testimonial-card__text">{{ review }}</p>
+          <div class="testimonial-stars" aria-label="5 star review">★★★★★</div>
+          <div class="testimonial-author">
+            <img src="{{ avatars[index] }}" alt="{{ names[index] | escape }}" loading="lazy" width="200" height="200">
+            <span class="testimonial-author__name">{{ names[index] }}</span>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Testimonials"
+    }
+  ]
+}
+{% endschema %}

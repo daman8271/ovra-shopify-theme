@@ -1,0 +1,96 @@
+{% liquid
+  assign announcement_text = section.settings.announcement_text | default: settings.announcement_text | default: 'FREE SHIPPING ON ORDERS OVER ₹1999 🖤'
+  assign logo_text = settings.brand_name | default: 'ŌVRA'
+%}
+
+<header class="site-header" id="SiteHeader">
+  {% if settings.announcement_enabled and section.settings.show_announcement %}
+    <div class="announcement-bar">
+      <p>{{ announcement_text }}</p>
+    </div>
+  {% endif %}
+
+  <div class="header-shell">
+    <a class="header-logo" href="{{ routes.root_url }}">{{ logo_text }}</a>
+
+    <nav class="header-nav" aria-label="Primary">
+      <a href="{{ routes.root_url }}#new-in">{{ 'header.nav_new_in' | t }}</a>
+      <a href="{{ routes.root_url }}#featured-collections">{{ 'header.nav_collections' | t }}</a>
+      <a href="{{ routes.root_url }}#lookbook">{{ 'header.nav_lookbook' | t }}</a>
+      <a href="{{ routes.root_url }}#sale-edit">{{ 'header.nav_sale' | t }}</a>
+      <a href="{{ routes.root_url }}#about">{{ 'header.nav_about' | t }}</a>
+    </nav>
+
+    <div class="header-actions">
+      <a class="header-icon-button" href="{{ routes.search_url }}" aria-label="{{ 'general.search' | t }}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+          <circle cx="11" cy="11" r="6"></circle>
+          <path d="m20 20-4.2-4.2"></path>
+        </svg>
+      </a>
+      <button class="header-icon-button" type="button" aria-label="Wishlist">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+          <path d="M12 20.5 4.7 13.4a4.9 4.9 0 0 1 0-7 5 5 0 0 1 7 0L12 6.7l.3-.3a5 5 0 0 1 7 0 4.9 4.9 0 0 1 0 7Z"></path>
+        </svg>
+      </button>
+      <button class="header-icon-button header-cart" type="button" data-cart-toggle aria-label="{{ 'general.cart' | t }}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+          <path d="M6.5 8h11l-1.4 10h-8.2L6.5 8Z"></path>
+          <path d="M9 8V6.5a3 3 0 0 1 6 0V8"></path>
+        </svg>
+        <span class="header-count" data-cart-count>{{ cart.item_count }}</span>
+      </button>
+      <button class="mobile-menu-toggle" type="button" data-mobile-menu-toggle aria-controls="MobileMenu" aria-expanded="false" aria-label="{{ 'general.menu' | t }}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="mobile-menu" id="MobileMenu" aria-hidden="true">
+    <div>
+      <div class="mobile-menu__top">
+        <a class="mobile-menu__brand" href="{{ routes.root_url }}">{{ logo_text }}</a>
+        <button class="mobile-menu__close" type="button" data-mobile-menu-toggle aria-label="{{ 'general.close' | t }}">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+            <path d="M6 6 18 18M18 6 6 18"></path>
+          </svg>
+        </button>
+      </div>
+
+      <nav class="mobile-menu__nav" aria-label="Mobile">
+        <a href="{{ routes.root_url }}#new-in">{{ 'header.nav_new_in' | t }}</a>
+        <a href="{{ routes.root_url }}#featured-collections">{{ 'header.nav_collections' | t }}</a>
+        <a href="{{ routes.root_url }}#lookbook">{{ 'header.nav_lookbook' | t }}</a>
+        <a href="{{ routes.root_url }}#sale-edit">{{ 'header.nav_sale' | t }}</a>
+        <a href="{{ routes.root_url }}#about">{{ 'header.nav_about' | t }}</a>
+      </nav>
+    </div>
+
+    <div class="mobile-menu__footer">
+      <span>{{ settings.brand_tagline | default: 'Wear The Difference' }}</span>
+      <span>Dark luxury streetwear, built for limited drops.</span>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_announcement",
+      "label": "Show announcement bar",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "announcement_text",
+      "label": "Announcement text",
+      "default": "FREE SHIPPING ON ORDERS OVER ₹1999 🖤"
+    }
+  ]
+}
+{% endschema %}

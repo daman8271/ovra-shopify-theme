@@ -1,0 +1,61 @@
+{% doc %}
+Render the global slide-out cart drawer.
+{% enddoc %}
+
+<aside class="cart-drawer" id="CartDrawer" aria-label="{{ 'cart_drawer.title' | t }}">
+  <div class="cart-drawer__header">
+    <div class="cart-drawer__header-row">
+      <h2 class="cart-drawer__heading">{{ 'cart_drawer.title' | t }}</h2>
+      <button class="cart-drawer__close" type="button" data-cart-close aria-label="{{ 'general.close' | t }}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+          <path d="M6 6 18 18M18 6 6 18"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="cart-drawer__items">
+    {% if cart.item_count > 0 %}
+      {% for item in cart.items %}
+        <div class="cart-drawer__item">
+          {% if item.image %}
+            {{ item.image | image_url: width: 220 | image_tag: alt: item.title, loading: 'lazy' }}
+          {% else %}
+            <img src="https://images.unsplash.com/photo-1556821840-3a63f15732ce?w=600" alt="{{ item.title | escape }}" loading="lazy" width="600" height="800">
+          {% endif %}
+
+          <div>
+            <h3 class="cart-drawer__item-title">{{ item.product.title }}</h3>
+            <div class="cart-drawer__item-meta">
+              {{ item.quantity }} × {{ item.final_price | money }}
+              {% if item.variant.title and item.variant.title != 'Default Title' %}
+                <br>{{ item.variant.title }}
+              {% endif %}
+            </div>
+            <div class="cart-drawer__item-price">{{ item.final_line_price | money }}</div>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p class="cart-drawer__empty">{{ 'cart_drawer.empty' | t }}</p>
+    {% endif %}
+  </div>
+
+  <div class="cart-drawer__footer">
+    <div class="cart-drawer__summary">
+      <span>{{ 'cart_drawer.subtotal' | t }}</span>
+      <strong>{{ cart.total_price | money }}</strong>
+    </div>
+
+    <div class="cart-drawer__actions">
+      {% form 'cart', cart %}
+        <button class="button" type="submit" name="checkout"{% if cart.item_count == 0 %} disabled{% endif %}>
+          {{ 'cart_drawer.checkout' | t }}
+        </button>
+      {% endform %}
+      <a class="cart-drawer__continue" href="{{ routes.root_url }}#featured-products" data-cart-close>
+        {{ 'cart_drawer.continue' | t }}
+      </a>
+    </div>
+  </div>
+</aside>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="{{ request.locale.iso_code }}" class="no-js">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0">
+  <title>
+    {%- if page_title -%}{{ page_title }} – {{ shop.name }}{%- else -%}{{ shop.name }} – Wear The Difference{%- endif -%}
+  </title>
+  {%- if page_description -%}<meta name="description" content="{{ page_description | escape }}">{%- else -%}<meta name="description" content="ŌVRA — Premium streetwear. Wear The Difference.">{%- endif -%}
+  <link rel="canonical" href="{{ canonical_url }}">
+  {%- if settings.favicon != blank -%}<link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">{%- endif -%}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  {{ 'ovra.css' | asset_url | stylesheet_tag }}
+  {{ content_for_header }}
+  <script>document.documentElement.className=document.documentElement.className.replace('no-js','js');</script>
+  <style>
+    :root {
+      --color-bg: {{ settings.color_background | default: '#0A0A0A' }};
+      --color-card-bg: {{ settings.color_card_bg | default: '#141414' }};
+      --color-text: {{ settings.color_text | default: '#FFFFFF' }};
+      --color-text-secondary: {{ settings.color_text_secondary | default: '#999999' }};
+      --color-accent: {{ settings.color_accent | default: '#C9A84C' }};
+      --color-accent-hover: {{ settings.color_accent_hover | default: '#FFD700' }};
+      --color-border: {{ settings.color_border | default: '#2A2A2A' }};
+    }
+  </style>
+</head>
+<body class="template-{{ template.name | handle }}{% if template.suffix %} template-{{ template.name }}-{{ template.suffix }}{% endif %}">
+  <div class="page-loader" id="pageLoader">
+    <div class="loader-content">
+      <span class="loader-logo">ŌVRA</span>
+      <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+    </div>
+  </div>
+  <div class="page-transition" id="pageTransition"></div>
+  <div class="cart-drawer-overlay" id="cartDrawerOverlay"></div>
+  {% render 'cart-drawer' %}
+  {% section 'header' %}
+  <main id="MainContent" class="main-content" role="main">
+    {{ content_for_layout }}
+  </main>
+  {% section 'footer' %}
+  <script src="{{ 'ovra.js' | asset_url }}" defer></script>
+</body>
+</html>

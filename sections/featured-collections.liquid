@@ -1,0 +1,62 @@
+{% liquid
+  assign titles = 'NEW ARRIVALS|BESTSELLERS|SALE' | split: '|'
+  assign counts = '24 pieces|18 pieces|12 pieces' | split: '|'
+  assign images = 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=800|https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?w=800|https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800' | split: '|'
+  assign anchors = '#new-in|#featured-products|#sale-edit' | split: '|'
+%}
+
+<section class="ovra-section" id="featured-collections">
+  <div class="ovra-container">
+    <div class="section-header">
+      <div>
+        <span class="eyebrow">Curated edits</span>
+        <h2 class="section-heading">{{ section.settings.heading | default: 'SHOP BY COLLECTION' }}</h2>
+      </div>
+      <p class="section-subheading">
+        Select from drop-driven capsules, editorial bestsellers, and marked-down pieces that still carry the full ŌVRA attitude.
+      </p>
+    </div>
+
+    <div class="collection-grid">
+      {% for title in titles %}
+        {% assign index = forloop.index0 %}
+        {% assign count = counts[index] %}
+        {% assign image = images[index] %}
+        {% assign anchor = anchors[index] %}
+        {% assign card_id = blank %}
+        {% if title == 'SALE' %}
+          {% assign card_id = 'sale-edit' %}
+        {% endif %}
+        <a class="collection-card" href="{{ routes.root_url }}{{ anchor }}"{% if card_id != blank %} id="{{ card_id }}"{% endif %}>
+          <img class="collection-card__image" src="{{ image }}" alt="{{ title | escape }}" loading="lazy" width="800" height="1000">
+          <div class="collection-card__content">
+            <h3 class="collection-card__title">{{ title }}</h3>
+            <div class="collection-card__meta">
+              <span class="collection-card__count">{{ count }}</span>
+              <span class="collection-card__link">{{ 'collections.explore' | t }}</span>
+            </div>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured collections",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "SHOP BY COLLECTION"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured collections"
+    }
+  ]
+}
+{% endschema %}

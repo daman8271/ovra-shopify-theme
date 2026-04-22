@@ -1,0 +1,61 @@
+{% doc %}
+@param {string} product_title - Product title to display
+@param {string} product_price - Product price to display
+@param {string} product_image - Primary image URL
+@param {string} product_image_hover - Hover image URL
+@param {string} product_colors - Comma separated list of swatch colors
+@param {string} [product_url] - Optional product destination URL
+{% enddoc %}
+
+{% liquid
+  assign sizes = 'XS,S,M,L,XL' | split: ','
+  assign color_values = product_colors | default: '#111111,#c9a84c,#7a7a7a' | split: ','
+  assign product_link = product_url | default: '#'
+%}
+
+<article class="product-card" data-product-card>
+  <button class="product-wishlist" type="button" data-product-wishlist aria-pressed="false" aria-label="Add {{ product_title | escape }} to wishlist">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+      <path d="M12 20.5 4.7 13.4a4.9 4.9 0 0 1 0-7 5 5 0 0 1 7 0L12 6.7l.3-.3a5 5 0 0 1 7 0 4.9 4.9 0 0 1 0 7Z"/>
+    </svg>
+  </button>
+
+  <a class="product-card__link" href="{{ product_link }}">
+    <div class="product-card__media">
+      <img
+        class="product-card__image"
+        src="{{ product_image }}"
+        alt="{{ product_title | escape }}"
+        loading="lazy"
+        width="600"
+        height="740"
+        data-product-image
+        data-primary="{{ product_image }}"
+        data-secondary="{{ product_image_hover | default: product_image }}"
+      >
+    </div>
+  </a>
+
+  <div class="product-card__content">
+    <a class="product-card__link" href="{{ product_link }}">
+      <h3 class="product-card__title">{{ product_title }}</h3>
+    </a>
+    <div class="product-card__price">{{ product_price }}</div>
+
+    <div class="product-card__colors" aria-label="Available colors">
+      {% for color in color_values limit: 4 %}
+        <span class="product-card__color" style="--swatch: {{ color | strip }};"></span>
+      {% endfor %}
+    </div>
+
+    <div class="product-card__sizes" aria-label="Available sizes">
+      {% for size in sizes %}
+        <span class="product-card__size">{{ size }}</span>
+      {% endfor %}
+    </div>
+
+    <button class="button product-card__add" type="button" data-add-to-cart>
+      {{ 'products.add_to_cart' | t }}
+    </button>
+  </div>
+</article>

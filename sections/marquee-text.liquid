@@ -1,0 +1,28 @@
+{% assign marquee_text = section.settings.text | default: 'NEW ARRIVALS ◆ FREE SHIPPING ◆ PREMIUM QUALITY ◆ WEAR THE DIFFERENCE ◆ LIMITED DROPS ◆ OVRA 2025 ◆' %}
+
+<section class="marquee-section" aria-label="Brand statements">
+  <div class="marquee-track">
+    {% for index in (1..4) %}
+      <span>{{ marquee_text }}</span>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Marquee text",
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Marquee text",
+      "default": "NEW ARRIVALS ◆ FREE SHIPPING ◆ PREMIUM QUALITY ◆ WEAR THE DIFFERENCE ◆ LIMITED DROPS ◆ OVRA 2025 ◆"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marquee text"
+    }
+  ]
+}
+{% endschema %}

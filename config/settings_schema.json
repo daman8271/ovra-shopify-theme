@@ -1,0 +1,120 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "ŌVRA",
+    "theme_version": "1.0.0",
+    "theme_author": "ŌVRA Studio",
+    "theme_documentation_url": "https://github.com/ovra-theme",
+    "theme_support_url": "https://github.com/ovra-theme/issues"
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Brand Colors"
+      },
+      {
+        "type": "color",
+        "id": "color_background",
+        "label": "Background",
+        "default": "#0A0A0A"
+      },
+      {
+        "type": "color",
+        "id": "color_card_bg",
+        "label": "Card Background",
+        "default": "#141414"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Primary Text",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "color_text_secondary",
+        "label": "Secondary Text",
+        "default": "#999999"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Gold Accent",
+        "default": "#C9A84C"
+      },
+      {
+        "type": "color",
+        "id": "color_accent_hover",
+        "label": "Gold Hover",
+        "default": "#FFD700"
+      },
+      {
+        "type": "color",
+        "id": "color_border",
+        "label": "Border Color",
+        "default": "#2A2A2A"
+      }
+    ]
+  },
+  {
+    "name": "Branding",
+    "settings": [
+      {
+        "type": "text",
+        "id": "brand_name",
+        "label": "Brand Name",
+        "default": "ŌVRA"
+      },
+      {
+        "type": "text",
+        "id": "brand_tagline",
+        "label": "Tagline",
+        "default": "Wear The Difference"
+      },
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon"
+      }
+    ]
+  },
+  {
+    "name": "Announcement Bar",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "announcement_enabled",
+        "label": "Enable Announcement Bar",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "announcement_text",
+        "label": "Announcement Text",
+        "default": "FREE SHIPPING ON ORDERS OVER ₹1999 🖤"
+      }
+    ]
+  },
+  {
+    "name": "Social Media",
+    "settings": [
+      {
+        "type": "url",
+        "id": "social_instagram",
+        "label": "Instagram URL"
+      },
+      {
+        "type": "url",
+        "id": "social_twitter",
+        "label": "Twitter URL"
+      },
+      {
+        "type": "url",
+        "id": "social_pinterest",
+        "label": "Pinterest URL"
+      }
+    ]
+  }
+]

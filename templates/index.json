@@ -1,0 +1,41 @@
+{
+  "sections": {
+    "hero_banner": {
+      "type": "hero-banner",
+      "settings": {}
+    },
+    "marquee_text": {
+      "type": "marquee-text",
+      "settings": {}
+    },
+    "featured_collections": {
+      "type": "featured-collections",
+      "settings": {}
+    },
+    "featured_products": {
+      "type": "featured-products",
+      "settings": {}
+    },
+    "full_width_lookbook": {
+      "type": "full-width-lookbook",
+      "settings": {}
+    },
+    "trust_badges": {
+      "type": "trust-badges",
+      "settings": {}
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "settings": {}
+    }
+  },
+  "order": [
+    "hero_banner",
+    "marquee_text",
+    "featured_collections",
+    "featured_products",
+    "full_width_lookbook",
+    "trust_badges",
+    "testimonials"
+  ]
+}

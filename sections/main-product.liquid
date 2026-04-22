@@ -1,0 +1,62 @@
+{% liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign fallback_image = 'https://images.unsplash.com/photo-1556821840-3a63f15732ce?w=900'
+%}
+
+<section class="main-product">
+  <div class="main-product__grid">
+    <div class="main-product__media">
+      <div class="main-product__gallery">
+        {% if product.featured_image %}
+          {{ product.featured_image | image_url: width: 1200 | image_tag: alt: product.title, loading: 'eager' }}
+        {% else %}
+          <img src="{{ fallback_image }}" alt="{{ product.title | escape }}" loading="eager" width="900" height="1100">
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="main-product__content">
+      <span class="eyebrow">{{ product.vendor | default: shop.name }}</span>
+      <h1 class="section-heading">{{ product.title }}</h1>
+      <div class="main-product__price">{{ current_variant.price | default: product.price | money }}</div>
+      <div class="main-product__description">
+        {{ product.description | default: 'A premium silhouette cut for oversized ease, clean lines, and all-day structure.' }}
+      </div>
+
+      {% form 'product', product, class: 'main-product__form' %}
+        {% unless product.has_only_default_variant %}
+          <label for="VariantSelect">Select size</label>
+          <select id="VariantSelect" name="id">
+            {% for variant in product.variants %}
+              <option value="{{ variant.id }}"{% if variant.id == current_variant.id %} selected{% endif %}>
+                {{ variant.title }}{% unless variant.available %} - Sold out{% endunless %}
+              </option>
+            {% endfor %}
+          </select>
+        {% else %}
+          <input type="hidden" name="id" value="{{ current_variant.id }}">
+        {% endunless %}
+
+        <label for="ProductQuantity">Quantity</label>
+        <input id="ProductQuantity" type="number" name="quantity" min="1" value="1">
+
+        <button class="button" type="submit"{% unless current_variant.available %} disabled{% endunless %}>
+          {% if current_variant.available %}{{ 'products.add_to_cart' | t }}{% else %}Sold out{% endif %}
+        </button>
+      {% endform %}
+
+      <div class="main-product__meta">
+        <span class="main-product__pill">Premium Fabrication</span>
+        <span class="main-product__pill">Limited Drop</span>
+        <span class="main-product__pill">India Delivery</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main product",
+  "settings": []
+}
+{% endschema %}

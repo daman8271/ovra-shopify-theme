@@ -1,0 +1,72 @@
+{
+  "general": {
+    "search": "Search",
+    "cart": "Cart",
+    "menu": "Menu",
+    "close": "Close"
+  },
+  "header": {
+    "announcement": "FREE SHIPPING ON ORDERS OVER ₹1999 🖤",
+    "nav_new_in": "NEW IN",
+    "nav_collections": "COLLECTIONS",
+    "nav_lookbook": "LOOKBOOK",
+    "nav_sale": "SALE",
+    "nav_about": "ABOUT"
+  },
+  "hero": {
+    "subtitle": "NEW COLLECTION 2025",
+    "heading_line1": "WEAR THE",
+    "heading_line2": "DIFFERENCE",
+    "description": "Premium streetwear designed for those who dare to stand apart. Curated pieces that blend luxury with urban edge.",
+    "shop_now": "SHOP NOW",
+    "view_lookbook": "VIEW LOOKBOOK"
+  },
+  "collections": {
+    "heading": "SHOP BY COLLECTION",
+    "new_arrivals": "NEW ARRIVALS",
+    "bestsellers": "BESTSELLERS",
+    "sale": "SALE",
+    "explore": "EXPLORE →"
+  },
+  "products": {
+    "heading": "LATEST DROPS",
+    "subheading": "Fresh pieces, limited quantities",
+    "add_to_cart": "ADD TO CART",
+    "view_all": "VIEW ALL"
+  },
+  "lookbook": {
+    "subtitle": "SS25 COLLECTION",
+    "heading": "THE LOOKBOOK",
+    "cta": "EXPLORE NOW →"
+  },
+  "trust": {
+    "shipping_title": "Free Shipping",
+    "shipping_text": "On orders over ₹1999",
+    "returns_title": "Easy Returns",
+    "returns_text": "30 day return policy",
+    "authentic_title": "100% Authentic",
+    "authentic_text": "Guaranteed genuine products",
+    "secure_title": "Secure Checkout",
+    "secure_text": "SSL encrypted payments"
+  },
+  "testimonials": {
+    "heading": "WHAT THEY SAY"
+  },
+  "footer": {
+    "tagline": "Wear The Difference",
+    "shop_heading": "SHOP",
+    "help_heading": "HELP",
+    "newsletter_heading": "JOIN THE FAMILY",
+    "newsletter_placeholder": "Your email address",
+    "newsletter_button": "SUBSCRIBE",
+    "copyright": "© 2025 ŌVRA. All rights reserved.",
+    "made_with": "Made with 🖤 in India"
+  },
+  "cart_drawer": {
+    "title": "YOUR BAG",
+    "empty": "Your bag is empty",
+    "subtotal": "Subtotal",
+    "checkout": "CHECKOUT",
+    "continue": "CONTINUE SHOPPING"
+  }
+}

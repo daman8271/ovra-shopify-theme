@@ -1,0 +1,48 @@
+{% liquid
+  assign titles = 'Oversized Drop Shoulder Hoodie|Cargo Utility Pants|Washed Denim Jacket|Ribbed Crop Tank|Wide Leg Trousers|Boxy Logo Tee|Puffer Vest|Relaxed Linen Shirt' | split: '|'
+  assign prices = '₹2,999|₹3,499|₹4,999|₹1,299|₹3,199|₹1,499|₹5,499|₹2,299' | split: '|'
+  assign images = 'https://images.unsplash.com/photo-1556821840-3a63f15732ce?w=600|https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=600|https://images.unsplash.com/photo-1523205771623-e0faa4d2813d?w=600|https://images.unsplash.com/photo-1503342564736-a292a25e0a93?w=600|https://images.unsplash.com/photo-1594938298603-c8148c4b4d51?w=600|https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600|https://images.unsplash.com/photo-1539533018447-63fcce2678e4?w=600|https://images.unsplash.com/photo-1598033129183-c4f50c736f10?w=600' | split: '|'
+  assign hover_images = 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800|https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=800|https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=800|https://images.unsplash.com/photo-1550614000-4895a10e1bfd?w=800|https://images.unsplash.com/photo-1544441893-675973e31985?w=600|https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=600|https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1600|https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=800' | split: '|'
+  assign colors = '#111111,#6b6359,#c9a84c|#2f332f,#7d7b6e,#d2b373|#385c8a,#111111,#c9a84c|#0e0e0e,#f5e0d3,#a17f64|#161616,#8d8879,#c0b59f|#111111,#f5f1eb,#bf9463|#191919,#55616d,#d4b35d|#f0e5d8,#8f8b7d,#262626' | split: '|'
+%}
+
+<section class="ovra-section" id="featured-products">
+  <div class="ovra-container">
+    <div class="section-header">
+      <div>
+        <span class="eyebrow">Drop now</span>
+        <h2 class="section-heading">{{ 'products.heading' | t }}</h2>
+      </div>
+      <p class="section-subheading">{{ 'products.subheading' | t }}</p>
+    </div>
+
+    <div class="product-grid">
+      {% for product_title in titles %}
+        {% assign index = forloop.index0 %}
+        {% render 'product-card',
+          product_title: product_title,
+          product_price: prices[index],
+          product_image: images[index],
+          product_image_hover: hover_images[index],
+          product_colors: colors[index]
+        %}
+      {% endfor %}
+    </div>
+
+    <div class="featured-products__footer">
+      <a class="button" href="{{ routes.all_products_collection_url }}">{{ 'products.view_all' | t }}</a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured products",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Featured products"
+    }
+  ]
+}
+{% endschema %}

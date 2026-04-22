@@ -1,0 +1,120 @@
+{% liquid
+  assign primary_link = section.settings.primary_link
+  assign secondary_link = section.settings.secondary_link
+
+  if primary_link == blank
+    assign primary_link = routes.root_url | append: '#featured-products'
+  endif
+
+  if secondary_link == blank
+    assign secondary_link = routes.root_url | append: '#lookbook'
+  endif
+%}
+
+<section class="hero-banner" id="new-in">
+  <div class="hero-banner__grid">
+    <div class="hero-banner__copy">
+      <span class="eyebrow">{{ section.settings.eyebrow | default: 'NEW COLLECTION 2025' }}</span>
+      <h1 class="hero-banner__heading">
+        <span>{{ section.settings.heading_line_1 | default: 'WEAR THE' }}</span>
+        <span>{{ section.settings.heading_line_2 | default: 'DIFFERENCE' }}</span>
+      </h1>
+      <p class="hero-banner__description">
+        {{ section.settings.description | default: 'Premium streetwear designed for those who dare to stand apart. Curated pieces that blend luxury with urban edge.' }}
+      </p>
+      <div class="hero-banner__actions">
+        <a class="button" href="{{ primary_link }}">
+          {{ section.settings.primary_label | default: 'SHOP NOW' }}
+        </a>
+        <a class="button button--secondary" href="{{ secondary_link }}">
+          {{ section.settings.secondary_label | default: 'VIEW LOOKBOOK' }}
+        </a>
+      </div>
+      <a class="hero-scroll-indicator" href="#featured-collections">
+        <span class="hero-scroll-indicator__arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+            <path d="M12 5v14"></path>
+            <path d="m6 13 6 6 6-6"></path>
+          </svg>
+        </span>
+        Scroll
+      </a>
+    </div>
+
+    <div class="hero-banner__media">
+      <img
+        class="hero-banner__image"
+        src="{{ section.settings.image | default: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600' }}"
+        alt="{{ section.settings.heading_line_2 | default: 'Difference' | escape }}"
+        loading="eager"
+        width="1600"
+        height="2000"
+      >
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero banner",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "NEW COLLECTION 2025"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_1",
+      "label": "Heading line 1",
+      "default": "WEAR THE"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_2",
+      "label": "Heading line 2",
+      "default": "DIFFERENCE"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Premium streetwear designed for those who dare to stand apart. Curated pieces that blend luxury with urban edge."
+    },
+    {
+      "type": "text",
+      "id": "primary_label",
+      "label": "Primary button label",
+      "default": "SHOP NOW"
+    },
+    {
+      "type": "url",
+      "id": "primary_link",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_label",
+      "label": "Secondary button label",
+      "default": "VIEW LOOKBOOK"
+    },
+    {
+      "type": "url",
+      "id": "secondary_link",
+      "label": "Secondary button link"
+    },
+    {
+      "type": "text",
+      "id": "image",
+      "label": "Hero image URL",
+      "default": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero banner"
+    }
+  ]
+}
+{% endschema %}

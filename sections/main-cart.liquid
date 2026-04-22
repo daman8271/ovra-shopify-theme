@@ -1,0 +1,66 @@
+<section class="main-cart">
+  {% if cart.item_count > 0 %}
+    <div class="cart-page__grid">
+      {% form 'cart', cart %}
+        <div class="cart-page__list">
+          {% for item in cart.items %}
+            <div class="cart-page__item">
+              {% if item.image %}
+                {{ item.image | image_url: width: 220 | image_tag: alt: item.title, loading: 'lazy' }}
+              {% else %}
+                <img src="https://images.unsplash.com/photo-1556821840-3a63f15732ce?w=600" alt="{{ item.title | escape }}" loading="lazy" width="600" height="800">
+              {% endif %}
+
+              <div>
+                <h2 class="cart-page__item-title">{{ item.product.title }}</h2>
+                <div class="cart-page__item-meta">
+                  {% if item.variant.title and item.variant.title != 'Default Title' %}
+                    {{ item.variant.title }}<br>
+                  {% endif %}
+                  Quantity
+                </div>
+                <input class="cart-page__quantity" type="number" name="updates[]" min="0" value="{{ item.quantity }}">
+                <div class="cart-page__item-price">{{ item.final_line_price | money }}</div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+
+        <aside class="cart-page__summary">
+          <span class="eyebrow">Bag summary</span>
+          <h2 class="section-heading">Your bag</h2>
+          <div class="cart-page__summary-row">
+            <span>Subtotal</span>
+            <strong>{{ cart.total_price | money }}</strong>
+          </div>
+          <div class="cart-page__summary-row">
+            <span>Shipping</span>
+            <strong>Calculated at checkout</strong>
+          </div>
+          <div class="cart-page__summary-row">
+            <span>Estimated arrival</span>
+            <strong>3-5 business days</strong>
+          </div>
+          <div class="cart-drawer__actions">
+            <button class="button button--ghost" type="submit" name="update">Update bag</button>
+            <button class="button" type="submit" name="checkout">{{ 'cart_drawer.checkout' | t }}</button>
+            <a class="cart-drawer__continue" href="{{ routes.root_url }}#featured-products">{{ 'cart_drawer.continue' | t }}</a>
+          </div>
+        </aside>
+      {% endform %}
+    </div>
+  {% else %}
+    <div class="cart-page__empty">
+      <h1 class="section-heading">{{ 'cart_drawer.title' | t }}</h1>
+      <p>{{ 'cart_drawer.empty' | t }}. Start with the latest drop and build your edit from there.</p>
+      <a class="button" href="{{ routes.root_url }}#featured-products">{{ 'cart_drawer.continue' | t }}</a>
+    </div>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Main cart",
+  "settings": []
+}
+{% endschema %}

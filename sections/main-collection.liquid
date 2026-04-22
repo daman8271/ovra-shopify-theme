@@ -1,0 +1,43 @@
+<section class="main-collection">
+  <div class="collection-page__hero">
+    <div>
+      <span class="eyebrow">{{ collection.handle | replace: '-', ' ' }}</span>
+      <h1 class="section-heading">{{ collection.title }}</h1>
+    </div>
+    <p class="collection-page__description">
+      {{ collection.description | default: 'A focused edit of ŌVRA silhouettes designed with dark luxury attitude, clean structure, and limited-quantity energy.' }}
+    </p>
+  </div>
+
+  <div class="ovra-container">
+    {% paginate collection.products by 12 %}
+      {% if collection.products_count > 0 %}
+        <div class="product-grid">
+          {% for product in collection.products %}
+            {% render 'product-card',
+              product_title: product.title,
+              product_price: product.price | money,
+              product_image: product.featured_image | image_url: width: 600 | default: 'https://images.unsplash.com/photo-1556821840-3a63f15732ce?w=600',
+              product_image_hover: product.images | slice: 1, 1 | first | default: product.featured_image | image_url: width: 600 | default: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600',
+              product_colors: '#111111,#c9a84c,#7d7d7d',
+              product_url: product.url
+            %}
+          {% endfor %}
+        </div>
+
+        <div class="pagination-wrapper">
+          {{ paginate | default_pagination }}
+        </div>
+      {% else %}
+        <div class="collection-page__empty">No products are currently available in this collection.</div>
+      {% endif %}
+    {% endpaginate %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main collection",
+  "settings": []
+}
+{% endschema %}

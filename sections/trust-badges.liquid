@@ -1,0 +1,32 @@
+{% liquid
+  assign icons = '🚚|↩️|✓|🔒' | split: '|'
+  assign titles = 'Free Shipping|Easy 30 Day Returns|100% Authentic Products|Secure Checkout' | split: '|'
+  assign texts = 'On orders over ₹1999|Simple exchanges and no-hassle returns|Sourced with a premium quality promise|Protected payments from cart to confirmation' | split: '|'
+%}
+
+<section class="ovra-section trust-badges">
+  <div class="ovra-container">
+    <div class="trust-grid">
+      {% for title in titles %}
+        {% assign index = forloop.index0 %}
+        <div class="trust-card">
+          <div class="trust-card__icon">{{ icons[index] }}</div>
+          <h3 class="trust-card__title">{{ title }}</h3>
+          <p class="trust-card__text">{{ texts[index] }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Trust badges",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Trust badges"
+    }
+  ]
+}
+{% endschema %}
