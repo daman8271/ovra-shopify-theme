@@ -1,0 +1,4 @@
+[environments.default]
+path = "."
+store = "ovra-clothing-demo.myshopify.com"
+ignore = ["config/settings_data.json"]
